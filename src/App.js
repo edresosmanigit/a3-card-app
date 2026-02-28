@@ -21,6 +21,20 @@ function App() {
 		<div className="app">
 			<h1>Card App</h1>
 			<p>Deck: {deck.length} Hand: {hand.length}</p>
+
+			{deck.length == 0 ? (
+				<div className="empty">No cards left in the deck</div>
+			) : (
+				<div className="deck" onClick={drawOne}>
+					{deck.length} left
+				</div>
+			)}
+
+			<div className="hand">
+				{hand.map(card => (
+					<Card suit={card.suit} num={card.num} picked={false} onClick={() => {}}/>
+				))}
+			</div>
 		</div>
   	);
 }
