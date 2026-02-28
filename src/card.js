@@ -1,8 +1,8 @@
 import "./card.css";
 
 function Card({suit, num, picked, onClick}){
-    const redCards = suit == "Hearts" || suit =="Diamonds";
-    const blackCards = suit == "Spades" || suit =="Clubs";
+    const redCards = suit == "♥" || suit =="♦";
+    const blackCards = suit == "♠" || suit =="♣";
     const classes = `card ${redCards ? "red" : ""} ${blackCards ? "black" : ""} ${picked ? "picked" : ""}`
 
     return(
