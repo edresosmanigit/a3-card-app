@@ -1,3 +1,5 @@
+import "./card.css";
+
 function Card({suit, num, picked, onClick}){
     const redCards = suit == "Hearts" || suit =="Diamonds";
     const blackCards = suit == "Spades" || suit =="Clubs";
