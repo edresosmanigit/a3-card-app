@@ -23,7 +23,7 @@ function App() {
 			<p>Deck: {deck.length} Hand: {hand.length}</p>
 
 			{deck.length == 0 ? (
-				<div className="empty">No cards left in the deck</div>
+				<div>No cards left in the deck</div>
 			) : (
 				<div className="deck" onClick={drawOne}>
 					{deck.length} left
