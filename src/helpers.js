@@ -1,4 +1,4 @@
-export const SUITS = ["Spades", "Diamonds", "Clubs", "Hearts"];
+export const SUITS = ["♠", "♦", "♣", "♥"];
 export const CARDNUMS = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
 
 export function buildDeck(){
@@ -15,7 +15,7 @@ export function shuffleDeck(cardArray){
     const arr = [...cardArray];
     for(let i = arr.length - 1; i > 0; i--){
         const j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [a[j], a[i]];
+        [arr[i], arr[j]] = [arr[j], arr[i]];
     }
-    return a;
+    return arr;
 }

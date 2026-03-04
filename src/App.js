@@ -1,4 +1,4 @@
-import { buildDeck, shuffleDeck, SUITS} from "./helpers";
+import { buildDeck, shuffleDeck, SUITS, CARDNUMS} from "./helpers";
 import Card from "./card";
 import { use, useState } from "react";
 import "./App.css";
@@ -6,6 +6,7 @@ import "./App.css";
 function App() {
 	const [deck, createDeck] = useState(buildDeck());
 	const [hand, createHand] = useState([]);
+	const [pickedId, setPickedId] = useState(null);
 
 	function drawOne(){
 		if (deck.length == 0) return;
@@ -18,32 +19,32 @@ function App() {
 	}
 
 	function dealCard(n) {
-		const all = shuffle([...deck, ...hand]);
-		setHand(all.slice(0, n));
-		setDeck(all.slice(n));
+		const all = shuffleDeck([...deck, ...hand]);
+		createHand(all.slice(0, n));
+		createDeck(all.slice(n));
 		setPickedId(null);
 	}
 
 	function reset(){
-		setDeck(buildDeck());
-		setHand([]);
+		createDeck(buildDeck());
+		createHand([]);
 		setPickedId(null);
 	}
 
 	function regroup(){
-		setHand(shuffleDeck(hand));
+		createHand(shuffleDeck(hand));
 	}
 
 	function wildCard(){
 		const suit = SUITS[Math.floor(Math.random() * SUITS.length)];
-		const num = NUMS[Math.floor(Math.random() * NUMS.length)];
+		const num = CARDNUMS[Math.floor(Math.random() * CARDNUMS.length)];
 
-		setHand([...hand, {suit, num, id :`${value}${suit}_${Date.now()}`}]);
+		createHand([...hand, {suit, num, id :`${num}${suit}_${Date.now()}`}]);
 	}
 
 	function toss(){
-		if(!picked) return;
-		setHand(hand.filter(card => card.id !== picked))
+		if(!pickedId) return;
+		createHand(hand.filter(card => card.id !== pickedId))
 	}
 
   	return (
@@ -61,8 +62,17 @@ function App() {
 
 			<div className="hand">
 				{hand.map(card => (
-					<Card key={card.id} suit={card.suit} num={card.num} picked={false} onClick={() => {}}/>
+					<Card key={card.id} suit={card.suit} num={card.num} picked={card.id == pickedId} onClick={() => {}}/>
 				))}
+			</div>
+
+			<div className="controls">
+				<button onClick={() => dealCard(5)}>Deal 5</button>
+				<button onClick={() => dealCard(7)}>Deal 7</button>
+				<button onClick={reset}>Reset</button>
+				<button onClick={regroup}>Regroup</button>
+				<button onClick={wildCard}>Wildcard</button>
+				<button onClick={toss} disabled={!pickedId}>Toss</button>
 			</div>
 		</div>
   	);
