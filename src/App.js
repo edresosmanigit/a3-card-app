@@ -47,6 +47,21 @@ function App() {
 		createHand(hand.filter(card => card.id !== pickedId))
 	}
 
+	function pickedCard(card){
+		if(!pickedId){
+			setPickedId(card.id);
+		}else if(pickedId == card.id){
+			setPickedId(null);
+		}else{
+			const a = hand.findIndex(c => c.id == pickedId);
+			const b = hand.findIndex(c => c.id == card.id);
+			const newHand = [...hand];
+			[newHand[a], newHand[b]] = [newHand[b], newHand[a]];
+			createHand(newHand);
+			setPickedId(null);
+		}
+	}
+
   	return (
 		<div className="app">
 			<h1>Card App</h1>
@@ -62,7 +77,7 @@ function App() {
 
 			<div className="hand">
 				{hand.map(card => (
-					<Card key={card.id} suit={card.suit} num={card.num} picked={card.id == pickedId} onClick={() => {}}/>
+					<Card key={card.id} suit={card.suit} num={card.num} picked={card.id == pickedId} onClick={() => pickedCard(card)}/>
 				))}
 			</div>
 
