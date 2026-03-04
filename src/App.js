@@ -41,6 +41,11 @@ function App() {
 		setHand([...hand, {suit, num, id :`${value}${suit}_${Date.now()}`}]);
 	}
 
+	function toss(){
+		if(!picked) return;
+		setHand(hand.filter(card => card.id !== picked))
+	}
+
   	return (
 		<div className="app">
 			<h1>Card App</h1>
