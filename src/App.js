@@ -17,10 +17,16 @@ function App() {
 		createHand([...hand, card])
 	}
 
-	function deal(n) {
+	function dealCard(n) {
 		const all = shuffle([...deck, ...hand]);
 		setHand(all.slice(0, n));
 		setDeck(all.slice(n));
+		setPickedId(null);
+	}
+
+	function reset(){
+		setDeck(buildDeck());
+		setHand([]);
 		setPickedId(null);
 	}
 
