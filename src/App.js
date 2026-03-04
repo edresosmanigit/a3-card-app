@@ -17,6 +17,13 @@ function App() {
 		createHand([...hand, card])
 	}
 
+	function deal(n) {
+		const all = shuffle([...deck, ...hand]);
+		setHand(all.slice(0, n));
+		setDeck(all.slice(n));
+		setPickedId(null);
+	}
+
   	return (
 		<div className="app">
 			<h1>Card App</h1>
@@ -32,7 +39,7 @@ function App() {
 
 			<div className="hand">
 				{hand.map(card => (
-					<Card suit={card.suit} num={card.num} picked={false} onClick={() => {}}/>
+					<Card key={card.id} suit={card.suit} num={card.num} picked={false} onClick={() => {}}/>
 				))}
 			</div>
 		</div>
