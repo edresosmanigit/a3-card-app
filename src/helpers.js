@@ -3,10 +3,10 @@ export const CARDNUMS = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J",
 
 export function buildDeck(){
     return SUITS.flatMap((suit) =>
-        CARDNUMS.map((nums) => ({
+        CARDNUMS.map((num) => ({
             suit: suit,
-            nums: nums,
-            id: `${nums}${suit}`
+            num: num,
+            id: `${num}${suit}`
         }))
     );
 }
