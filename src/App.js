@@ -1,4 +1,4 @@
-import { buildDeck} from "./helpers";
+import { buildDeck, shuffleDeck} from "./helpers";
 import Card from "./card";
 import { use, useState } from "react";
 import "./App.css";
@@ -28,6 +28,10 @@ function App() {
 		setDeck(buildDeck());
 		setHand([]);
 		setPickedId(null);
+	}
+
+	function regroup(){
+		setHand(shuffleDeck(hand));
 	}
 
   	return (
