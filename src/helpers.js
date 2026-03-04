@@ -1,3 +1,5 @@
+//StAuth10244: I Edres Osmani, 000918923 certify that this material is my original work. No other person's work has been used without due acknowledgement. I have not made my work available to anyone else
+
 export const SUITS = ["♠", "♦", "♣", "♥"];
 export const CARDNUMS = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
 
