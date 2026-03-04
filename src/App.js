@@ -1,7 +1,8 @@
 import { buildDeck, shuffleDeck, SUITS, CARDNUMS} from "./helpers";
 import Card from "./card";
-import { use, useState } from "react";
+import { useState } from "react";
 import "./App.css";
+import Deck from "./deck";
 
 function App() {
 	const [deck, createDeck] = useState(buildDeck());
@@ -45,6 +46,7 @@ function App() {
 	function toss(){
 		if(!pickedId) return;
 		createHand(hand.filter(card => card.id !== pickedId))
+		setPickedId(null);
 	}
 
 	function pickedCard(card){
@@ -67,19 +69,7 @@ function App() {
 			<h1>Card App</h1>
 			<p>Deck: {deck.length} Hand: {hand.length}</p>
 
-			{deck.length == 0 ? (
-				<div>No cards left in the deck</div>
-			) : (
-				<div className="deck" onClick={drawOne}>
-					{deck.length} left
-				</div>
-			)}
-
-			<div className="hand">
-				{hand.map(card => (
-					<Card key={card.id} suit={card.suit} num={card.num} picked={card.id == pickedId} onClick={() => pickedCard(card)}/>
-				))}
-			</div>
+			<Deck count={deck.length} onClick={drawOne} />
 
 			<div className="controls">
 				<button onClick={() => dealCard(5)}>Deal 5</button>
@@ -89,6 +79,13 @@ function App() {
 				<button onClick={wildCard}>Wildcard</button>
 				<button onClick={toss} disabled={!pickedId}>Toss</button>
 			</div>
+
+			<div className="hand">
+				{hand.map(card => (
+					<Card key={card.id} suit={card.suit} num={card.num} picked={card.id == pickedId} onClick={() => pickedCard(card)}/>
+				))}
+			</div>
+
 		</div>
   	);
 }
