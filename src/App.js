@@ -1,4 +1,4 @@
-import { buildDeck, shuffleDeck} from "./helpers";
+import { buildDeck, shuffleDeck, SUITS} from "./helpers";
 import Card from "./card";
 import { use, useState } from "react";
 import "./App.css";
@@ -32,6 +32,13 @@ function App() {
 
 	function regroup(){
 		setHand(shuffleDeck(hand));
+	}
+
+	function wildCard(){
+		const suit = SUITS[Math.floor(Math.random() * SUITS.length)];
+		const num = NUMS[Math.floor(Math.random() * NUMS.length)];
+
+		setHand([...hand, {suit, num, id :`${value}${suit}_${Date.now()}`}]);
 	}
 
   	return (
